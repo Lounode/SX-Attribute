@@ -6,8 +6,6 @@ import github.saukiya.sxattribute.SXAttribute;
 import github.saukiya.sxattribute.util.Config;
 import github.saukiya.sxattribute.util.Message;
 import github.saukiya.sxitem.util.NMS;
-import io.lumine.xikage.mythicmobs.MythicMobs;
-import io.lumine.xikage.mythicmobs.mobs.ActiveMob;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Bukkit;

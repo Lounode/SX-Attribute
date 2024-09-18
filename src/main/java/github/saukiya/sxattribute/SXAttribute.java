@@ -22,10 +22,9 @@ import github.saukiya.sxattribute.util.Message;
 import github.saukiya.sxattribute.util.MoneyUtil;
 import github.saukiya.sxattribute.util.PlaceholderUtil;
 import github.saukiya.sxitem.command.MainCommand;
+import github.saukiya.sxitem.data.ScriptManager;
 import github.saukiya.sxitem.util.LogUtil;
 import github.saukiya.sxitem.util.NMS;
-import jdk.internal.dynalink.beans.StaticClass;
-import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import lombok.Getter;
 import lombok.Setter;
 import org.bstats.bukkit.Metrics;
@@ -83,6 +82,9 @@ public class SXAttribute extends JavaPlugin {
     private static SlotDataManager slotDataManager;
 
     @Getter
+    private static ScriptManager scriptManager;
+
+    @Getter
     private static ListenerHealthChange listenerHealthChange;
 
     @Getter
@@ -136,6 +138,8 @@ public class SXAttribute extends JavaPlugin {
             new AttackSpeed().registerAttribute();
         }
         new Command().registerAttribute();
+        /*
+        scriptManager = new ScriptManager(this, "Scripts/Global.js", "Scripts/Default.js");
 
         File jsAttributeFiles = new File(getDataFolder(), "Attribute" + File.separator + "JavaScript");
         if (!jsAttributeFiles.exists() && NMS.compareTo(1, 9, 0) >= 0) {
@@ -170,7 +174,7 @@ public class SXAttribute extends JavaPlugin {
                 }
             }
         }
-
+        */
         if (NMS.compareTo(1, 9, 0) >= 0) {
             new MainHand().registerCondition();
             new OffHand().registerCondition();

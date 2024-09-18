@@ -8,7 +8,6 @@ import org.bukkit.permissions.Permission;
 import org.bukkit.permissions.PermissionAttachment;
 import org.bukkit.permissions.PermissionAttachmentInfo;
 import org.bukkit.plugin.Plugin;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Set;
 
@@ -97,12 +96,12 @@ public class SXCommandSender implements CommandSender {
     public Spigot spigot() {
         return new Spigot() {
             @Override
-            public void sendMessage(@NotNull BaseComponent... components) {
+            public void sendMessage(BaseComponent... components) {
 
             }
 
             @Override
-            public void sendMessage(@NotNull BaseComponent component) {
+            public void sendMessage(BaseComponent component) {
 
             }
         };

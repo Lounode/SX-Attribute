@@ -21,20 +21,19 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.bstats:bstats-bukkit:2.2.1'
     compileOnly fileTree('libs')
     compileOnly fileTree('lib')
-//    implementation 'org.openjdk.nashorn:nashorn-core:15.3'
-    compileOnly 'io.lumine.xikage:MythicMobs:4.9.1'
+    compileOnly 'org.spigotmc:spigot-api:1.21.1-R0.1-SNAPSHOT'
+
     compileOnly 'com.gmail.filoghost.holographicdisplays:holographicdisplays-api:2.4.9'
     compileOnly 'com.github.MilkBowl:VaultAPI:1.7.1'
     compileOnly 'com.github.PlaceholderAPI:PlaceholderAPI:2.10.9'
-    compileOnly 'org.projectlombok:lombok:1.18.22'
-    implementation 'org.bstats:bstats-bukkit:2.2.1'
-    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 
-    testCompileOnly fileTree('libs/spigot-1.14')
-    testImplementation 'org.projectlombok:lombok:1.18.22'
-    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    compileOnly 'org.projectlombok:lombok:1.18.34'
+    annotationProcessor 'org.projectlombok:lombok:1.18.34'
+    testImplementation 'org.projectlombok:lombok:1.18.34'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.34'
 }
 
 shadowJar {
@@ -50,6 +49,13 @@ task buildLastJar(type: Copy) {
     dependsOn shadowJar
     from shadowJar.archiveFile.get().asFile.path
     into("$rootDir").rename { "build/out/${project.name}-Latest.jar" }
+}
+
+task buildDebugJar(type: Copy) {
+    dependsOn clean
+    dependsOn shadowJar
+    from shadowJar.archiveFile.get().asFile.path
+    into("$rootDir/run/plugins").rename { "${project.name}-Debug.jar" }
 }
 
 //gradle 需要对文件中含有的'$'进行转义: $ -> \$

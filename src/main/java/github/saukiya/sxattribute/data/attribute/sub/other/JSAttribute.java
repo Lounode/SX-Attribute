@@ -4,7 +4,6 @@ import github.saukiya.sxattribute.SXAttribute;
 import github.saukiya.sxattribute.data.attribute.AttributeType;
 import github.saukiya.sxattribute.data.attribute.SubAttribute;
 import github.saukiya.sxattribute.data.eventdata.EventData;
-import jdk.nashorn.api.scripting.ScriptObjectMirror;
 import lombok.Getter;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.LivingEntity;
@@ -114,6 +113,7 @@ public class JSAttribute extends SubAttribute {
     @Override
     @SuppressWarnings("unchecked")
     public List<String> getPlaceholders() {
+        /*
         try {
             Object object = invocable.invokeFunction("getPlaceholders");
             if (object instanceof List) {
@@ -134,6 +134,8 @@ public class JSAttribute extends SubAttribute {
             }
             return null;
         }
+         */
+        return new ArrayList<>();
     }
 
     @Override

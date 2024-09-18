@@ -82,20 +82,27 @@ public class SXAttributeManager implements Listener {
      * @return SXAttribute
      */
     public SXAttributeData loadItemData(LivingEntity entity, List<PreLoadItem> preItemList) {
-        Iterator<PreLoadItem> iterator = preItemList.iterator();
+        List<PreLoadItem> modifiableList = new ArrayList<>(preItemList);
+        Iterator<PreLoadItem> iterator = modifiableList.iterator();
         while (iterator.hasNext()) {
             PreLoadItem preLoadItem = iterator.next();
             List<String> list = new ArrayList<>();
             if (preLoadItem.getItem().getItemMeta().hasLore()) {
-                list = preLoadItem.getItem().getItemMeta().getLore().stream().map(str -> str.split("§X")[0]).filter(str -> str.length() > 0).collect(Collectors.toList());
+                list = preLoadItem.getItem().getItemMeta().getLore().stream()
+                        .map(str -> str.split("§X")[0])
+                        .filter(str -> str.length() > 0)
+                        .collect(Collectors.toList());
             }
             if (!SXAttribute.getConditionManager().isUse(entity, preLoadItem.getType(), list)) {
                 iterator.remove();
             }
         }
+        preItemList = modifiableList;
 
         //CallEvent
-        Bukkit.getPluginManager().callEvent(new SXPreLoadItemEvent(entity, preItemList));
+        if (!Bukkit.isPrimaryThread()) {
+            Bukkit.getPluginManager().callEvent(new SXPreLoadItemEvent(entity, preItemList));
+        }
 
         SXAttributeData attributeData = new SXAttributeData();
         // LoadAttribute
@@ -106,7 +113,9 @@ public class SXAttributeManager implements Listener {
         }
 
         //CallEvent
-        Bukkit.getPluginManager().callEvent(new SXLoadAttributeEvent(entity, preItemList, attributeData));
+        if (!Bukkit.isPrimaryThread()) {
+            Bukkit.getPluginManager().callEvent(new SXLoadAttributeEvent(entity, preItemList, attributeData));
+        }
         return attributeData;
     }
 
