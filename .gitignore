@@ -1,6 +1,9 @@
 /.idea/
-/.gradle/
-/.build/
-/.idea
-/run
 .idea
+/.gradle/
+/gradle
+/.build/
+/build
+/run
+/out
+
